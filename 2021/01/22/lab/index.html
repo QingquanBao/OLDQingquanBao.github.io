@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    lab |  hi
+    远程服务器构建Jupyter Lab |  hi
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -57,7 +57,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  lab
+  远程服务器构建Jupyter Lab
 </h1>
  
 
@@ -109,7 +109,7 @@
 <li><p>运行<code>jupyter lab</code> or <code>jupyter notebook</code> </p>
 </li>
 </ol>
-<h2 id="服务器指定接口进入"><a href="#服务器指定接口进入" class="headerlink" title="服务器指定接口进入"></a>服务器指定接口进入</h2><p>以上是在google就能搜索到的常规操作，但笔者的服务器需要在特定接口范围内才能连接，直接在浏览器打开<code>https://server_ip:54010</code> 根本不work。后来使用ssh tunnel的方法解决了。</p>
+<h2 id="服务器指定接口进入"><a href="#服务器指定接口进入" class="headerlink" title="服务器指定接口进入"></a>服务器指定接口进入</h2><p>以上是在google就能搜索到的常规操作，但笔者的服务器需要在特定接口范围内才能连接，直接在浏览器打开<code>https://server_ip:54010</code> 根本不work。后来使用<a target="_blank" rel="noopener" href="https://www.zsythink.net/archives/2450">ssh tunnel</a>的方法解决了。</p>
 <p>具体而言，在完成以上操作后，本地新开一个终端窗口，输入</p>
 <p><code> ssh -L 8886:localhost:54010 -N -T -p given_port name@server_ip</code></p>
 <p>其中8886是本地端口，届时可以通过<code>https:localhost:8886</code> 直接远程打开Jupyter Lab；<code>given_port </code>是服务器指定的公网接口。</p>
@@ -180,6 +180,8 @@
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/" rel="tag">tools</a></li></ul>
+
     </footer>
   </div>
 
@@ -189,7 +191,7 @@
     
       <a href="/2020/08/15/hello/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">hello</div>
+        <div class="article-nav-title">hello, this is a Question Board</div>
       </a>
     
   </nav>
