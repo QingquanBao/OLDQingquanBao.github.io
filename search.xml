@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>lab</title>
+      <link href="/2021/01/22/lab/"/>
+      <url>/2021/01/22/lab/</url>
+      
+        <content type="html"><![CDATA[<h1 id="远程服务器构建Jupyter-lab"><a href="#远程服务器构建Jupyter-lab" class="headerlink" title="远程服务器构建Jupyter lab"></a>远程服务器构建Jupyter lab</h1><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ol><li><p>安装好Jupyter lab ：）</p></li><li><p>生成密码，记得复制，类似’sha1:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx’</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> notebook.auth <span class="keyword">import</span> passwd </span><br><span class="line">passwd()</span><br></pre></td></tr></table></figure></li><li><p>配置</p><p>先在终端生成配置文件<code>jupyter notebook --generate-config</code> ，进行修改<code>$ vim ~/.jupyter/jupyter_notebook_config.py </code> 。参数如下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.allow_remote_access = True</span><br><span class="line">c.NotebookApp.open_browser = False</span><br><span class="line">c.NotebookApp.ip=&#x27;*&#x27;</span><br><span class="line">c.NotebookApp.password = u&#x27;sha1:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#x27;</span><br><span class="line">c.NotebookApp.port =54010</span><br></pre></td></tr></table></figure></li><li><p>运行<code>jupyter lab</code> or <code>jupyter notebook</code> </p></li></ol><h2 id="服务器指定接口进入"><a href="#服务器指定接口进入" class="headerlink" title="服务器指定接口进入"></a>服务器指定接口进入</h2><p>以上是在google就能搜索到的常规操作，但笔者的服务器需要在特定接口范围内才能连接，直接在浏览器打开<code>https://server_ip:54010</code> 根本不work。后来使用ssh tunnel的方法解决了。</p><p>具体而言，在完成以上操作后，本地新开一个终端窗口，输入</p><p><code> ssh -L 8886:localhost:54010 -N -T -p given_port name@server_ip</code></p><p>其中8886是本地端口，届时可以通过<code>https:localhost:8886</code> 直接远程打开Jupyter Lab；<code>given_port </code>是服务器指定的公网接口。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>hello</title>
       <link href="/2020/08/15/hello/"/>
       <url>/2020/08/15/hello/</url>

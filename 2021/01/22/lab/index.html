@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    hello |  hi
+    lab |  hi
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -46,8 +46,8 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-hello"
-  class="article article-type-post"
+  id="远程服务器构建jupyter-lab"
+  class="article article-type-远程服务器构建jupyter"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
@@ -57,22 +57,22 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  hello
+  lab
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2020/08/15/hello/" class="article-date">
-  <time datetime="2020-08-15T01:50:56.000Z" itemprop="datePublished">2020-08-15</time>
+      <a href="/2021/01/22/lab/" class="article-date">
+  <time datetime="2021-01-22T10:10:47.000Z" itemprop="datePublished">2021-01-22</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">238</span>
         </span>
     </span>
 
@@ -88,13 +88,32 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="远程服务器构建Jupyter-lab"><a href="#远程服务器构建Jupyter-lab" class="headerlink" title="远程服务器构建Jupyter lab"></a>远程服务器构建Jupyter lab</h1><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ol>
+<li><p>安装好Jupyter lab ：）</p>
+</li>
+<li><p>生成密码，记得复制，类似’sha1:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx’</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> notebook.auth <span class="keyword">import</span> passwd </span><br><span class="line">passwd()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置</p>
+<p>先在终端生成配置文件<code>jupyter notebook --generate-config</code> ，进行修改<code>$ vim ~/.jupyter/jupyter_notebook_config.py </code> 。参数如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c.NotebookApp.allow_remote_access = True</span><br><span class="line">c.NotebookApp.open_browser = False</span><br><span class="line">c.NotebookApp.ip=&#x27;*&#x27;</span><br><span class="line">c.NotebookApp.password = u&#x27;sha1:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#x27;</span><br><span class="line">c.NotebookApp.port =54010</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行<code>jupyter lab</code> or <code>jupyter notebook</code> </p>
+</li>
+</ol>
+<h2 id="服务器指定接口进入"><a href="#服务器指定接口进入" class="headerlink" title="服务器指定接口进入"></a>服务器指定接口进入</h2><p>以上是在google就能搜索到的常规操作，但笔者的服务器需要在特定接口范围内才能连接，直接在浏览器打开<code>https://server_ip:54010</code> 根本不work。后来使用ssh tunnel的方法解决了。</p>
+<p>具体而言，在完成以上操作后，本地新开一个终端窗口，输入</p>
+<p><code> ssh -L 8886:localhost:54010 -N -T -p given_port name@server_ip</code></p>
+<p>其中8886是本地端口，届时可以通过<code>https:localhost:8886</code> 直接远程打开Jupyter Lab；<code>given_port </code>是服务器指定的公网接口。</p>
+ 
       <!-- reward -->
       
     </div>
@@ -156,7 +175,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtUlEQVR42u3aQVLjUAwE0Nz/0syWqYHQLf2fCVXPK8ok2M8LybT0eMTHx6fj85n8Mx//HM8/8/xbhw88PDy8xa0/v4mW1/42P5PcMx4eHt5t3vNLJrC2PTx/xO09fHseDw8P7214eQtJvpU0Gzw8PLzfy2vLfRtwtE0CDw8P73/x9n86KeVJVJFHIYezFjw8PLyYl0+R3ufnK/M9PDw8vPVUPQ8C8qI8K/rDu8XDw8O7wMsLbhI3JAHubBFh8/jw8PDwzvI20cAmRGjD4uEYDA8PD+/lvPxMXrKTBxSNtZLv4uHh4V3gtWtSs9Wo5IU4X8aqr4KHh4d3jbcp37NRVrtYMGxLeHh4eC/h5XHD5tZnMUe9eoWHh4d3jbeJX08tbOXBcR5Y4OHh4Z3ltfHrbFSWLwGcWvn6YQCGh4eHd5TXlvscvwk48gZTz/Hw8PDwRrzZilU7vtpcqx2w/dUY8PDw8C7w8oZx9oU4L/RtlDzcKcPDw8OL35bzALcuzWVgkbei4tHj4eHhHeVtRk15k8hvNF+riq6Lh4eHd4E3eyHOi/VmQaENPqLuh4eHh7fmJYP5WWOYvay3DSPKWvDw8PCO8malvA1eH/GxbzlR4oKHh4e34G1K8yYgyCOP2dIVHh4e3j3eJj7YhLltXJsHIgf6Hh4eHl7Aa29330hmj6k9g4eHh3ebtynr+bpVG/XOHtAXjQEPDw/vAq8NCPax73CUNRt94eHh4R3ifZTHbHA1W5xq28wPS1d4eHh4h3j7oX4Sy7at4jm+HYbh4eHh3eDN/vQsOMjbw+y6XyDx8PDwrvFm4648YJ21otkn8fDw8H4jL19NmK0FFGM2PDw8vDfjzYLaNiuo1wXw8PDwXsJLyvesQM9uvY1uf2gMeHh4eEd57T/8yet1i8xXE1YMPDw8vC3vDyZKac4f2fU5AAAAAElFTkSuQmCC" alt="微信分享二维码">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACq0lEQVR42u3aQY7bQAwEwP3/p5MHBFK6yRmsDuVT4HUslg9Dooc/P/Hrzz+v9jNPf336ZP7cAy88PDy8delPRSSfSQp9qiF/J6kHDw8P7zbv/ZHvB337Pe9H/NN3ts/Cw8PD+w4vaRv5Uf7OzpsQHh4e3vd5bVTxnhLkPwEeHh7ed3jtV+djcTKCt23jStaCh4eHF/PyQ/w7/75yv4eHh4e3vlXfX4Yl7SFfF6irxcPDw7vAyw/cWXTbDtPJqd7WiYeHh3ePNwtM3x8/W8zKnxKFuXh4eHhHefnIu/kh8kWENm6I8mk8PDy8o7y26PaYzktvm0fxA+Hh4eFd4G2O4Nm4nMe+s0EcDw8P7zYvL3HfTtpoeH8Vh4eHh3eD10a3p4La2bCe14aHh4f3W7xTSwOzVa39agIeHh7eDV4bgJ4tLh/lZxdveHh4eGd5s2j1/f18PSsZndsw4nHpCg8PD+8Qrz2+8wigjRVmo3kURuDh4eFd4OXFnb2mav86qxYPDw/vBq+4gI8P61mhN3al8PDw8G7wZlFCEh+0EUYbheRPx8PDwzvLaxtDfsW1CYVn8UfRwfDw8PAWvFmoerboNnpoQ148PDy8G7ziMn5UULsy1Q7fwx6Ih4eHt+Dtr6byd2aH/ibywMPDwzvLa4/pzdX+Pv4Y9jo8PDy8C7zZKtXqzm0RbRQ/EB4eHt5lXn6lNCs9aSez8LfOhvHw8PBGvE1LOBUxtIsIxTIWHh4e3gXe5lI/DwhmK1nt/501FTw8PLwZr40e2lWD9iifRRuP1eLh4eFd47VRQjLyDgfcsoP9p0Xh4eHhfYCXLw3ky1ubRYHoAgwPDw/vV3lt1Nv+TPkIHrUfPDw8vGu8ttw8DmiH7P0oj4eHh3ebdzYaSI772fLBAQYeHh7elvcXJiqxhuQi0+4AAAAASUVORK5CYII=" alt="微信分享二维码">
     </div>
 </div>
 
@@ -167,19 +186,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/01/22/lab/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            lab
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/08/15/hello-world/" class="article-nav-link">
+      <a href="/2020/08/15/hello/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Hello World</div>
+        <div class="article-nav-title">hello</div>
       </a>
     
   </nav>
